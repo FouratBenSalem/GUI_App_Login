@@ -8,10 +8,11 @@ import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import Creation.CreateUser;
 
-import java.util.Arrays; // for demonstration purposes in the password handling method ( actionPerformed )
+//import java.util.Arrays; // for demonstration purposes in the password handling method ( actionPerformed )
 
-public class GUI implements ActionListener {
+public class Login implements ActionListener {
 
     private static JLabel userLabel; // added these variables to increase their scope 
     private static JLabel passwordLabel;    // and to use them in the actionPerformed method
@@ -19,10 +20,13 @@ public class GUI implements ActionListener {
     private static JPasswordField passwordText;
     private static JButton button;
     private static JButton closeButton;
+    private static JButton createNewUser;
+
 
     private static JLabel success;
 
-    public static void main(String[] args) {
+    public Login(){
+
         JFrame frame = new JFrame(); // whole window
         JPanel panel = new JPanel(); // layout
 
@@ -50,8 +54,8 @@ public class GUI implements ActionListener {
         panel.add(passwordText);
 
         button = new JButton("Login");
-        button.setBounds(160, 80, 80, 25);
-        button.addActionListener(new GUI()); // we implemented the ActionListener
+        button.setBounds(10, 80, 80, 25);
+        button.addActionListener(e -> actionPerformed(e)); // we implemented the ActionListener
         panel.add(button);
 
         // you can delete this but it works
@@ -59,6 +63,13 @@ public class GUI implements ActionListener {
         closeButton.setBounds(250, 80, 80, 25);
         closeButton.addActionListener(e -> {System.out.println("User Exit.."); System.exit(0); }); // a function in one line
         panel.add(closeButton);
+
+        createNewUser = new JButton("Create new profile");
+        createNewUser.setBounds(102,135,140,25);
+        createNewUser.addActionListener(e -> {
+            new CreateUser();
+        });
+        panel.add(createNewUser);
 
         
         success = new JLabel("");

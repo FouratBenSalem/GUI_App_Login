@@ -1,4 +1,9 @@
-public class App
-{
-    //this is useless for now
+
+public class App {
+
+
+    public static void main(String[] args){
+
+        new Login();
+    }
 }
