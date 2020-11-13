@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 
 
 
-public class CreateUser {
+public class CreateUser implements ActionListener{
 
     private static JLabel userNameLabel; // added these variables to increase their scope 
     private static JLabel userPasswordLabel;    // and to use them in the actionPerformed method
@@ -103,6 +103,22 @@ public class CreateUser {
 
 
         frame.setVisible(true); // was under closeoperations
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) { // gets run whenever we click the button
+        System.out.println("( ! ) Button clicked :");  
+        String userName = userNameField.getText();
+        char[] password = userPasswordField.getPassword(); //returns the password but as an array      
+        String passwordString = new String(password); // turning a char array to a string
+        //String stringer = Arrays.toString(password).substring(1, 3*password.length-1).replaceAll(", ", "");
+        String userID = userIDField.getText();
+        System.out.println(" Name :  "+userName + ", Password :  "+passwordString + ", ID : "+ userID);
+        //System.out.println("  or : "+user + " : "+stringer);
+
+
+        
 
     }
 
