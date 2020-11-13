@@ -61,7 +61,7 @@ public class Login implements ActionListener {
         // you can delete this but it works
         closeButton = new JButton("Exit");
         closeButton.setBounds(250, 80, 80, 25);
-        closeButton.addActionListener(e -> {System.out.println("User Exit.."); System.exit(0); }); // a function in one line
+        closeButton.addActionListener(e -> {System.out.println("User Exit from Login.."); System.exit(0); }); // a function in one line
         panel.add(closeButton);
 
         createNewUser = new JButton("Create new profile");
