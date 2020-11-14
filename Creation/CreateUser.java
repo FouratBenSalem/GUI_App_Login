@@ -10,6 +10,11 @@ import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//      File Stuff
+import java.io.File;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
 
 
 public class CreateUser implements ActionListener{
@@ -35,7 +40,7 @@ public class CreateUser implements ActionListener{
         JFrame frame = new JFrame(); // whole window
         JPanel panel = new JPanel(); // layout
 
-        frame.setSize(400, 600);
+        frame.setSize(400, 450);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.add(panel);
@@ -88,9 +93,7 @@ public class CreateUser implements ActionListener{
 
         confirm = new JButton("Confirm");
         confirm.setBounds(40,180,80,25);
-        confirm.addActionListener(e -> {
-
-        });
+        confirm.addActionListener(e -> {actionPerformed(e);   /* Maybe add a login here to reopen the login frame  */  });
         panel.add(confirm);
 
         closeButton = new JButton("Exit");
@@ -106,6 +109,25 @@ public class CreateUser implements ActionListener{
 
     }
 
+    public void addUser(User u){
+        File file = new File("loggedUsers.txt");
+
+        try{
+        FileOutputStream fo = new FileOutputStream(file); // takes file
+        ObjectOutputStream output = new ObjectOutputStream(fo); // takes fileOutputStream
+        
+        output.writeObject(u); // put User object in the file
+        
+    
+        output.close();
+        fo.close();
+        }
+        catch(IOException e){
+            System.out.println("Inner Input / Output Exception Thrown");
+        }
+        
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) { // gets run whenever we click the button
         System.out.println("( ! ) Button clicked :");  
@@ -114,12 +136,13 @@ public class CreateUser implements ActionListener{
         String passwordString = new String(password); // turning a char array to a string
         //String stringer = Arrays.toString(password).substring(1, 3*password.length-1).replaceAll(", ", "");
         String userID = userIDField.getText();
+        String userEmail = userEmailField.getText();
         System.out.println(" Name :  "+userName + ", Password :  "+passwordString + ", ID : "+ userID);
         //System.out.println("  or : "+user + " : "+stringer);
+        User user = new User(userName, passwordString, userID, userEmail);
 
-
+        addUser(user);
         
-
     }
 
 }
